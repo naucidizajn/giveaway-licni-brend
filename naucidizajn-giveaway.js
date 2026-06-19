@@ -14,7 +14,7 @@
 
     var ND_CONFIG = {
       webhookUrl: 'https://hook.eu2.make.com/dlstkyxp1k8vf20lfy6xjmhjordumax3',
-      // form_id razlikuje ovaj giveaway od ostalih na istom Make webhook-u — ne menjaj bez razloga.
+      // form_id razlikuje ovaj giveaway od ostalih na istom Make webhook-u - ne menjaj bez razloga.
       formId: 'naucidizajn-giveaway-licni-brend',
       thankYouUrl: 'https://naucidizajn.com/giveaway-jun-2026-uspesna-prijava',
       submitTimeoutMs: 8000,
@@ -112,8 +112,8 @@
       {c:'ZM',n:'Zambia',d:'+260'},{c:'ZW',n:'Zimbabwe',d:'+263'}
     ];
 
-    // Min/Max digit length za number bez country code-a (NSN — National Significant Number).
-    // Default fallback (van mape): 6–15 cifara (ITU E.164 maksimum). Mapa pokriva Balkan +
+    // Min/Max digit length za number bez country code-a (NSN - National Significant Number).
+    // Default fallback (van mape): 6-15 cifara (ITU E.164 maksimum). Mapa pokriva Balkan +
     // susedne zemlje koje su najveći deo prijava za giveaway. Vrednosti su konzervativne.
     var ND_PHONE_NSN_LEN = {
       RS: [8, 9], BA: [8, 8], ME: [8, 8], HR: [8, 9], SI: [8, 8], MK: [8, 8],
@@ -219,8 +219,8 @@
           choices: [
             { label: '0 €' },
             { label: 'do 300 €' },
-            { label: '300–1.000 €' },
-            { label: '1.000–3.000 €' },
+            { label: '300-1.000 €' },
+            { label: '1.000-3.000 €' },
             { label: '3.000+ €' }
           ]
         },
@@ -242,7 +242,7 @@
         {
           key: 'q7_uspeh', type: 'textarea',
           title: 'Ako bismo zajedno radili naredna 3 meseca, šta bi za tebe bio OGROMAN uspeh?',
-          description: 'Napiši konkretan cilj — npr. 3–5 klijenata, X € mesečno.',
+          description: 'Napiši konkretan cilj - npr. 3-5 klijenata, X € mesečno.',
           required: true,
           placeholder: 'Tvoj odgovor…'
         },
@@ -299,8 +299,8 @@
           key: 'q14_cta', type: 'cta',
           eyebrow: 'DUPLIRAJ SVOJU ŠANSU',
           paragraphs: [
-            'Pre nego što pošalješ svoju prijavu — na sledećem ekranu dobićeš svoj <strong>unikatan link</strong>. Pošalji ga dizajneru kome bi ovaj program bio koristan.',
-            'Ako izvučemo njega/nju, a oni su došli na tvoju preporuku — <strong>i ti osvajaš glavnu nagradu!</strong>'
+            'Pre nego što pošalješ svoju prijavu - na sledećem ekranu dobićeš svoj <strong>unikatan link</strong>. Pošalji ga dizajneru kome bi ovaj program bio koristan.',
+            'Ako izvučemo njega/nju, a oni su došli na tvoju preporuku - <strong>i ti osvajaš glavnu nagradu!</strong>'
           ],
           buttonText: 'POŠALJI SVOJU PRIJAVU'
         }
@@ -420,7 +420,7 @@
     }
 
     function renderEnterHint() {
-      // Disabled per user feedback — hint je sklonjen sa svih koraka.
+      // Disabled per user feedback - hint je sklonjen sa svih koraka.
       return '';
     }
 
@@ -683,7 +683,7 @@
           // Mora da postoji bar jedna pauza između imena i prezimena (Marko Marković)
           return /\s/.test(v) && v.split(/\s+/).filter(Boolean).length >= 2;
         }
-        // 'nonempty' (default) — npr. portfolio link ili „Nemam"
+        // 'nonempty' (default) - npr. portfolio link ili „Nemam"
         return v.length >= 2;
       }
       function setError(on, msg) {
@@ -738,7 +738,7 @@
 
       function digitsOnly(s) { return String(s || '').replace(/\D/g, ''); }
       function isPhoneValid() {
-        // Bez per-country blokade — prihvatamo bilo koju dužinu sa makar 4 cifre.
+        // Bez per-country blokade - prihvatamo bilo koju dužinu sa makar 4 cifre.
         return digitsOnly(input.value).length >= 4;
       }
       function setError(on, msg) {
@@ -863,7 +863,7 @@
     }
 
     function getNextKey(currentKey) {
-      // Linearno — nema skip-to-end logike
+      // Linearno - nema skip-to-end logike
       var idx = FORM.fields.findIndex(function(f){ return f.key === currentKey; });
       if (idx === -1 || idx === FORM.fields.length - 1) return 'END';
       return FORM.fields[idx + 1].key;
@@ -957,9 +957,9 @@
       }
       // Enter za OK
       if (e.key === 'Enter' && !e.shiftKey) {
-        // Textarea — Enter pravi new line, Cmd/Ctrl+Enter handluje handler
+        // Textarea - Enter pravi new line, Cmd/Ctrl+Enter handluje handler
         if (field && field.type === 'textarea' && !e.metaKey && !e.ctrlKey) return;
-        // Choice — ako je izabran, OK
+        // Choice - ako je izabran, OK
         if (field && field.type === 'choice') {
           var sel = activeEl.querySelector('.nd-choice.nd-selected');
           if (sel) {
@@ -968,7 +968,7 @@
           }
           return;
         }
-        // CTA (završni ekran) — Enter šalje prijavu
+        // CTA (završni ekran) - Enter šalje prijavu
         if (field && field.type === 'cta') {
           var ok2 = activeEl.querySelector('[data-action="submit"]');
           if (ok2) { e.preventDefault(); ok2.click(); }
@@ -1046,7 +1046,7 @@
 
     function sendFetch(url, payload, timeoutMs) {
       if (ND_CONFIG.isTestEnv) {
-        console.log('%c[ND Giveaway] Webhook (TEST — not sent):', 'color:#DBFF00;font-weight:bold');
+        console.log('%c[ND Giveaway] Webhook (TEST - not sent):', 'color:#DBFF00;font-weight:bold');
         console.log(payload);
         // Plain-text JSON dump za test okruženja gde console ne prikazuje objekat:
         try { console.log('[ND Giveaway] payload JSON:\n' + JSON.stringify(payload, null, 2)); } catch(e) {}
@@ -1077,7 +1077,7 @@
         partialReason: 'exited_early'
       });
       if (ND_CONFIG.isTestEnv) {
-        console.log('[ND Giveaway] Exit-partial (TEST — not sent):', payload);
+        console.log('[ND Giveaway] Exit-partial (TEST - not sent):', payload);
         return;
       }
       sendBeaconJson(ND_CONFIG.webhookUrl, payload);
@@ -1125,7 +1125,7 @@
             if (errEl) {
               errEl.hidden = false;
               errEl.style.color = '#DBFF00';
-              errEl.textContent = '✓ TEST mode — payload je u console. Redirect je ovde isključen.';
+              errEl.textContent = '✓ TEST mode - payload je u console. Redirect je ovde isključen.';
             }
             return;
           }

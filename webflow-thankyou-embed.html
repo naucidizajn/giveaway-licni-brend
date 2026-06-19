@@ -1,4 +1,4 @@
-<!-- Nauči Dizajn — Giveaway Lični brend · THANK-YOU embed -->
+<!-- Nauči Dizajn - Giveaway Lični brend · THANK-YOU embed -->
 <!-- Paste-uj CEO ovaj blok u Webflow Embed Code element na /giveaway-jun-2026-uspesna-prijava -->
 <!-- Self-contained. Referral AKTIVAN preko giveaway-licni-brend-referral.vercel.app (Supabase-only). -->
 
@@ -216,7 +216,7 @@
       dashboardBaseUrl: 'https://giveaway-licni-brend-referral.vercel.app' // samo za demo karticu; pravi dashboardUrl vraća API
     };
 
-    // Tekstovi header-a (eyebrow + podnaslov) — uvek se prikazuju.
+    // Tekstovi header-a (eyebrow + podnaslov) - uvek se prikazuju.
     var COPY = {
       eyebrow: 'Dupliraj svoju šansu',
       subtitle: 'Pre nego što pošalješ svoju prijavu - na sledećem ekranu dobićeš svoj ' +
@@ -256,7 +256,7 @@
     var ref   = getParam(['ref', 'Ref'])     || stashed.ref || getStoredRef();
 
     if (!email) {
-      renderStatus('Nismo pročitali prijavu. <strong>Proveri email</strong> — ako si se uspešno prijavio/la, javićemo ti pobednika tim putem.');
+      renderStatus('Nismo pročitali prijavu. <strong>Proveri email</strong> - ako si se uspešno prijavio/la, javićemo ti pobednika tim putem.');
       return;
     }
     try { localStorage.setItem('nd_ty_email', email); } catch (e) {}
@@ -272,7 +272,7 @@
     })
     .catch(function (err) {
       console.error('[nd-ty] signup failed', err);
-      renderStatus('Problem pri generisanju referral linka. <strong>Proveri email</strong> — javićemo ti detalje uskoro.');
+      renderStatus('Problem pri generisanju referral linka. <strong>Proveri email</strong> - javićemo ti detalje uskoro.');
     });
 
     // ================================================================
@@ -307,7 +307,7 @@
       document.getElementById('nd-ty-input').addEventListener('click', function (e) { e.target.select(); });
     }
 
-    // Placeholder dok referral backend nije gotov — kartica vizuelno postoji,
+    // Placeholder dok referral backend nije gotov - kartica vizuelno postoji,
     // ali bez stvarnog linka (sprečava prikaz lažnog linka realnim korisnicima).
     function renderPlaceholder() {
       root.innerHTML =
@@ -319,7 +319,7 @@
               '<input class="nd-ty-input" placeholder="Tvoj unikatan link stiže uskoro…" readonly disabled />' +
               '<button class="nd-ty-btn" type="button" disabled>Kopiraj</button>' +
             '</div>' +
-            '<div class="nd-ty-footnote">Referral sistem je u izradi — uskoro ćeš ovde dobiti svoj link za deljenje.</div>' +
+            '<div class="nd-ty-footnote">Referral sistem je u izradi - uskoro ćeš ovde dobiti svoj link za deljenje.</div>' +
           '</div>' +
         '</div>';
     }

@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex, nofollow" />
-<title>Moj referral · Nauči Dizajn — Giveaway jun 2026</title>
+<title>Moj referral · Nauči Dizajn - Giveaway jun 2026</title>
 <style>
   @font-face {
     font-family: 'Raptor';
@@ -549,7 +549,7 @@
       <div class="card">
         <div class="card-label">Ljudi koje si doveo (${count})</div>
         ${referrals.length === 0
-          ? `<div class="empty">Još niko. Podeli link iznad — potreban ti je samo klik na "Kopiraj".</div>`
+          ? `<div class="empty">Još niko. Podeli link iznad - potreban ti je samo klik na "Kopiraj".</div>`
           : `<ul class="ref-list">${referrals.map(renderRefItem).join('')}</ul>`}
       </div>
 
@@ -565,7 +565,7 @@
 
     const rows = board.map((r) => {
       const top3 = r.rank <= 3;
-      const name = [r.first_name, r.last_name].filter(Boolean).join(' ') || '—';
+      const name = [r.first_name, r.last_name].filter(Boolean).join(' ') || '-';
       return `
         <li class="lb-item ${top3 ? 'top-3' : ''}">
           <div class="lb-rank">${r.rank}</div>
@@ -582,7 +582,7 @@
 
     const showMyPosition = myRank != null && myRank > board.length;
     const foot = showMyPosition
-      ? `<div class="lb-foot">Ti si <span class="highlight">#${myRank}</span> sa ${myCount} ${plural(myCount)}. Vrati se na vrh — nije kasno.</div>`
+      ? `<div class="lb-foot">Ti si <span class="highlight">#${myRank}</span> sa ${myCount} ${plural(myCount)}. Vrati se na vrh - nije kasno.</div>`
       : '';
 
     return `
@@ -595,7 +595,7 @@
   }
 
   function renderRefItem(r) {
-    const full = [r.first_name, r.last_name].filter(Boolean).join(' ') || '—';
+    const full = [r.first_name, r.last_name].filter(Boolean).join(' ') || '-';
     return `
       <li class="ref-item">
         <div class="ref-item-main">

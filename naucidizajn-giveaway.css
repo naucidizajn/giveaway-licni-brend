@@ -1,4 +1,4 @@
-    /* Verzija: v1.0 — Giveaway Lični brend (Q1-Q14: ime, kvalifikacija, kontakt, CTA) */
+    /* Verzija: v1.0 - Giveaway Lični brend (Q1-Q14: ime, kvalifikacija, kontakt, CTA) */
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { background: #232421 !important; margin: 0 !important; padding: 0 !important; min-height: 100vh; }
@@ -334,7 +334,7 @@
       background: transparent;
       padding: 6px 0;
     }
-    /* Per-field error state — crveni underline + poruka ispod */
+    /* Per-field error state - crveni underline + poruka ispod */
     #nd-form .nd-input-wrap.nd-has-error,
     #nd-form .nd-textarea-wrap.nd-has-error,
     #nd-form .nd-phone-row.nd-has-error {
