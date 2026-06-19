@@ -564,11 +564,10 @@
     if (!board || board.length === 0) return '';
 
     const rows = board.map((r) => {
-      const isMe = r.is_me === true;
       const top3 = r.rank <= 3;
       const name = [r.first_name, r.last_name].filter(Boolean).join(' ') || '—';
       return `
-        <li class="lb-item ${isMe ? 'me' : ''} ${top3 ? 'top-3' : ''}">
+        <li class="lb-item ${top3 ? 'top-3' : ''}">
           <div class="lb-rank">${r.rank}</div>
           <div>
             <div class="lb-name">${escapeHtml(name)}</div>
