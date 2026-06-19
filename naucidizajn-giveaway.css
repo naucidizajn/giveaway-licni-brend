@@ -351,6 +351,7 @@
       color: #ff6b6b;
       margin-top: 6px;
       margin-bottom: 8px;
+      margin-left: 32px;
       display: none;
     }
     #nd-form .nd-field-error.nd-show { display: block; }
@@ -636,6 +637,7 @@
       #nd-form .nd-input-wrap,
       #nd-form .nd-textarea-wrap,
       #nd-form .nd-phone-row,
+      #nd-form .nd-field-error,
       #nd-form .nd-contact-grid,
       #nd-form .nd-actions { margin-left: 0; }
       /* Welcome ostaje vertikalno centriran i na mobile-u (default flex align-items: center) */
