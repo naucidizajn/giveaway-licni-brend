@@ -55,7 +55,18 @@ U `master.html` → `ND_CONFIG`:
 ### Još otvoreno
 
 - **`FORM.welcome`** (master.html) — draft copy hero ekrana (naslov + 2 paragrafa). Zameni finalnim tekstom kad bude spreman → re-ekstrahuj css/js.
-- **Referral widget** na thank-you stranici je **placeholder** (`CONFIG.REFERRAL_ENABLED = false` u `thankyou.html`). Kad referral backend bude gotov: postavi `REFERRAL_ENABLED = true` + popuni `apiUrl`. Logika za pravi link je već u fajlu, samo se aktivira. Za pregled finalnog izgleda otvori `thankyou.html?demo=1`.
+
+## Referral sistem (AKTIVAN)
+
+Thank-you kartica generiše pravi referral link preko **postojeće, već deploy-ovane** infrastrukture (deli se sa ostalim Nauči Dizajn kampanjama):
+
+- **API:** `https://nauci-dizajnu-referral.vercel.app/api/signup` (Supabase-only mod — bez Kit-a, jer `thankyou.html` ne šalje `tagId`)
+- **Supabase:** `bfnutgejcpqxghyslxur.supabase.co` (isti projekat; tabela `signups` je deljena — nema kolone za kampanju, pa se pobednici filtriraju po `created_at`)
+- **Dashboard:** `https://app.naucidizajn.com/?t=<token>` (link „svojoj platformi" u kartici)
+
+Tok: forma hvata `?r=CODE` (`captureRef` u master.html, bez landing-head snippet-a) → na submit stash-uje `{email,name,ref}` u `sessionStorage.nd_signup` → thank-you čita stash, POST-uje na `/api/signup` sa `webinarUrl = CONFIG.landingUrl` → API upiše u Supabase i vrati `{ shareUrl, dashboardUrl }`.
+
+Konfiguracija u `thankyou.html` → `CONFIG`: `REFERRAL_ENABLED: true`, `apiUrl`, `landingUrl` (baza `?r=` linka — **mora biti URL landing stranice**). Pregled izgleda bez API poziva: `thankyou.html?demo=1`.
 
 ## Webhook payload
 

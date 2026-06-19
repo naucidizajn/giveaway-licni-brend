@@ -1,6 +1,6 @@
 <!-- Nauči Dizajn — Giveaway Lični brend · THANK-YOU embed -->
 <!-- Paste-uj CEO ovaj blok u Webflow Embed Code element na /giveaway-jun-2026-uspesna-prijava -->
-<!-- Self-contained (ne zavisi od GitHub-a). Referral kartica je placeholder dok REFERRAL_ENABLED=false. -->
+<!-- Self-contained. Referral je AKTIVAN (Supabase-only mod preko nauci-dizajnu-referral.vercel.app). -->
 
 <style>
     .nd-ty-wrap {
@@ -201,16 +201,19 @@
     // ================================================================
     // KONFIG
     // ================================================================
-    // REFERRAL_ENABLED: false dok ne napravimo referral backend.
-    //   • false  → prikazuje placeholder karticu ("link stiže uskoro").
-    //   • true   → čita signup (sessionStorage/URL) i poziva apiUrl da generiše
-    //              pravi referral link (logika je već ispod, samo se aktivira).
-    // Kad referral bude gotov: postavi REFERRAL_ENABLED=true i popuni apiUrl.
+    // REFERRAL_ENABLED:
+    //   • true  → čita signup (sessionStorage/URL) i poziva apiUrl koji u Supabase-only
+    //             modu (bez tagId) upiše prijavu i vrati pravi { shareUrl, dashboardUrl }.
+    //   • false → prikazuje placeholder karticu ("link stiže uskoro").
+    // Backend (Vercel /api/signup + Supabase + dashboard na app.naucidizajn.com) se DELI
+    // sa drugim Nauči Dizajn kampanjama; razlikovanje ide po landingUrl-u.
     var CONFIG = {
-      REFERRAL_ENABLED: false,
-      apiUrl: '', // TODO(referral): API endpoint koji vraća { firstName, shareUrl, dashboardUrl }
-      shareBaseUrl: 'https://naucidizajn.com/giveaway-jun-2026',
-      dashboardBaseUrl: 'https://app.naucidizajn.com'
+      REFERRAL_ENABLED: true,
+      apiUrl: 'https://nauci-dizajnu-referral.vercel.app/api/signup',
+      // Bez tagId u payload-u → API radi Supabase-only mod (bez Kit-a).
+      // landingUrl = baza ?r= share linka (mora biti URL landing stranice sa našom formom).
+      landingUrl: 'https://naucidizajn.com/giveaway-jun-2026',
+      dashboardBaseUrl: 'https://app.naucidizajn.com' // samo za demo karticu; pravi dashboardUrl vraća API
     };
 
     // Tekstovi header-a (eyebrow + podnaslov) — uvek se prikazuju.
@@ -235,7 +238,7 @@
     // ---- Rute ----
     if (!CONFIG.REFERRAL_ENABLED) {
       if (isDemo) {
-        renderReferralCard({ shareUrl: CONFIG.shareBaseUrl + '?r=X7K2M9', dashboardUrl: CONFIG.dashboardBaseUrl + '/?t=demo-token' });
+        renderReferralCard({ shareUrl: CONFIG.landingUrl + '?r=X7K2M9', dashboardUrl: CONFIG.dashboardBaseUrl + '/?t=demo-token' });
       } else {
         renderPlaceholder();
       }
@@ -244,7 +247,7 @@
 
     // ---- REFERRAL_ENABLED = true (aktivira se kasnije) ----
     if (isDemo) {
-      renderReferralCard({ shareUrl: CONFIG.shareBaseUrl + '?r=X7K2M9', dashboardUrl: CONFIG.dashboardBaseUrl + '/?t=demo-token' });
+      renderReferralCard({ shareUrl: CONFIG.landingUrl + '?r=X7K2M9', dashboardUrl: CONFIG.dashboardBaseUrl + '/?t=demo-token' });
       return;
     }
     var stashed = readStashedSignup();
@@ -261,7 +264,7 @@
     fetch(CONFIG.apiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email, name: name, ref: ref, shareBaseUrl: CONFIG.shareBaseUrl })
+      body: JSON.stringify({ email: email, name: name, ref: ref, webinarUrl: CONFIG.landingUrl })
     })
     .then(function (res) { if (!res.ok) throw new Error('status ' + res.status); return res.json(); })
     .then(function (data) {
