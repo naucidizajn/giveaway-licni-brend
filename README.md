@@ -12,10 +12,18 @@ Multi-step prijavna forma za giveaway 3-mesečnog mentorskog programa (lični br
 ├── master.html                     ← source-of-truth forme (CSS + JS + HTML u jednom). RADI U OVOM FAJLU.
 ├── naucidizajn-giveaway.css        ← ekstrakt iz master.html (deploy artifact)
 ├── naucidizajn-giveaway.js         ← ekstrakt iz master.html (deploy artifact)
-├── embed.html                      ← Webflow embed snippet za landing (paste-uj u Embed Code element)
-├── thankyou.html                   ← Webflow embed za thank-you stranicu (referral kartica je placeholder)
+├── embed.html                      ← Webflow embed za LANDING (paste-uj ceo fajl u Embed Code element)
+├── thankyou.html                   ← standalone thank-you stranica (za lokalni test)
+├── webflow-thankyou-embed.html     ← Webflow embed za THANK-YOU (paste-uj ceo fajl u Embed Code element)
 └── index.html                      ← GitHub Pages test wrapper za formu
 ```
+
+## Webflow embed — šta gde ide
+
+- **Landing stranica** → paste-uj ceo [`embed.html`](embed.html). Povlači CSS/JS sa GitHub Pages
+  (forma je ~74KB, prevelika za Webflow-ov 50K inline limit) — **GitHub Pages mora biti uključen**.
+- **Thank-you stranica** (`/giveaway-jun-2026-uspesna-prijava`) → paste-uj ceo
+  [`webflow-thankyou-embed.html`](webflow-thankyou-embed.html). Self-contained (~13KB, ne zavisi od GitHub-a).
 
 ## Forma — pitanja po redu
 
