@@ -58,15 +58,19 @@ U `master.html` → `ND_CONFIG`:
 
 ## Referral sistem (AKTIVAN)
 
-Thank-you kartica generiše pravi referral link preko **postojeće, već deploy-ovane** infrastrukture (deli se sa ostalim Nauči Dizajn kampanjama):
+Thank-you kartica generiše pravi referral link preko **namenskog** Vercel projekta (odvojen od starog webinar projekta, izvor je u [`/referral`](referral)):
 
-- **API:** `https://nauci-dizajnu-referral.vercel.app/api/signup` (Supabase-only mod — bez Kit-a, jer `thankyou.html` ne šalje `tagId`)
-- **Supabase:** `bfnutgejcpqxghyslxur.supabase.co` (isti projekat; tabela `signups` je deljena — nema kolone za kampanju, pa se pobednici filtriraju po `created_at`)
-- **Dashboard:** `https://app.naucidizajn.com/?t=<token>` (link „svojoj platformi" u kartici)
+- **Vercel projekat:** `giveaway-licni-brend-referral` (naucidizajn nalog), deploy iz `/referral`
+- **API:** `https://giveaway-licni-brend-referral.vercel.app/api/signup` (Supabase-only mod — bez Kit-a, jer `thankyou.html` ne šalje `tagId`)
+- **Dashboard:** `https://giveaway-licni-brend-referral.vercel.app/?t=<token>` (link „svojoj platformi" u kartici)
+- **Supabase:** `bfnutgejcpqxghyslxur.supabase.co` (isti projekat kao stari; tabela `signups` je deljena — nema kolone za kampanju, pa se pobednici filtriraju po `created_at`)
 
 Tok: forma hvata `?r=CODE` (`captureRef` u master.html, bez landing-head snippet-a) → na submit stash-uje `{email,name,ref}` u `sessionStorage.nd_signup` → thank-you čita stash, POST-uje na `/api/signup` sa `webinarUrl = CONFIG.landingUrl` → API upiše u Supabase i vrati `{ shareUrl, dashboardUrl }`.
 
 Konfiguracija u `thankyou.html` → `CONFIG`: `REFERRAL_ENABLED: true`, `apiUrl`, `landingUrl` (baza `?r=` linka — **mora biti URL landing stranice**). Pregled izgleda bez API poziva: `thankyou.html?demo=1`.
+
+**Env varijable** (Vercel projekat `giveaway-licni-brend-referral`): `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `DASHBOARD_BASE_URL`.
+**Redeploy** posle izmene u `/referral`: `cd referral && vercel link --project giveaway-licni-brend-referral --scope naucidizajns-projects && vercel deploy --prod` (`.vercel/` je u .gitignore, pa se prvi put linkuje).
 
 ## Webhook payload
 
